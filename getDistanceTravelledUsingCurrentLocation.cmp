@@ -1,0 +1,79 @@
+<aura:component controller="getStartStopDistance" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	  <aura:attribute name="header" type="Aura.component[]">
+        <h2>
+            <b>Calculate Distance</b>
+        </h2>
+    </aura:attribute>
+    <aura:attribute name="startPointBool" type="boolean" default="false"/> 
+    <aura:attribute name="endPointBool" type="boolean" default="true"/> 
+    <aura:attribute name="distanceBool" type="boolean" default="true"/> 
+    <aura:attribute name="sLat" type="double"/>
+    <aura:attribute name="sLong" type="double"/>
+    <aura:attribute name="eLat" type="double"/>
+    <aura:attribute name="eLong" type="double"/>
+    <aura:attribute name="distance" type="double"/>
+    <lightning:card title="{!v.header}"> 
+        <lightning:layout multipleRows="true" horizontalAlign="center">   
+            <div class="outerDiv">
+                <div class="buttonDiv">
+                <lightning:button aura:id   = "startButton"
+                                  label     = "Start Loc"
+                                  variant   = "brand" 
+                                  onclick   = "{!c.getStartValues}"                                  
+                                  disabled  = "{!v.startPointBool}"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <lightning:button aura:id   = "endButton"
+                                  label     = "End Loc"
+                                  variant   = "brand" 
+                                  onclick   = "{!c.getEndValues}"
+                                  disabled  = "{!v.endPointBool}"/>
+                </div>
+                <br/>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>Start Lat:</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>{!v.sLat}</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>Start Long:</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>{!v.sLong}</span>
+                    </div>
+                </div>
+                    <br/>
+                <div class="slds-grid slds-wrap">
+                     <div class="slds-col slds-size_6-of-12">
+                        <span>End Lat:</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>{!v.eLat}</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>End Long:</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>{!v.eLong}</span>
+                    </div>                   
+                </div><br/>
+                <br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <lightning:button aura:id   = "distanceButton"
+                                  label     = "Calculate Distance"
+                                  variant   = "brand" 
+                                  onclick   = "{!c.getDistance}"
+                                  disabled  = "{!v.distanceBool}"/>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>Distance:</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>{!v.distance}</span>
+                    </div>
+                </div>                
+            </div>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>
