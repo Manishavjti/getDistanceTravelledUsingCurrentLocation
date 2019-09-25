@@ -1,0 +1,14 @@
+@media screen and (min-width: 768px){ 
+    .THIS .outerDiv {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 1024px){ 
+    .THIS .outerDiv {
+        padding: 20px;
+    }
+}
+
+
+}
