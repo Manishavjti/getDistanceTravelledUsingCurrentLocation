@@ -1,0 +1,30 @@
+public class getStartStopDistance {
+    
+    @AuraEnabled
+    public static void getDist(Decimal startlat,Decimal startlong,Decimal stoplat,Decimal stoplong){
+        Decimal totalDistance;
+        Location loc1 = Location.newInstance(startlat, startlong);
+        system.debug('loc1'+loc1);
+        Location loc2 = Location.newInstance(stoplat, stoplong);
+        system.debug('loc2'+loc2);
+        User userObj = [SELECT distance__c FROM User WHERE Id =: UserInfo.getUserId()];
+        if(userObj.distance__c != null){
+            totalDistance = userObj.distance__c;
+            system.debug('totalDistance in if condition '+totalDistance);
+        }else
+        {
+            totalDistance = 0;
+        }
+        
+        totalDistance += Location.getDistance(loc1, loc2, 'mi');
+        userObj.distance__c = totalDistance;
+        system.debug('totalDistance in if condition '+userObj.distance__c);
+        UPDATE userObj;       
+    }
+    
+    @AuraEnabled
+    public static decimal showDistance(){
+        User userObj = [SELECT distance__c FROM User WHERE Id =: UserInfo.getUserId()];
+        return userObj.distance__c ;
+    }    
+}
